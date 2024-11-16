@@ -7,7 +7,9 @@ interface QuizContextProps {
   setPlayer: React.Dispatch<React.SetStateAction<Player>>;
 }
 
-export const QuizContext = createContext<QuizContextProps | undefined>(undefined);
+export const QuizContext = createContext<QuizContextProps | undefined>(
+  undefined
+);
 
 export function usePlayerContext() {
   const player = useContext(QuizContext);

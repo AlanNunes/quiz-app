@@ -31,6 +31,15 @@ body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 
 }
 
+.answer-feedback {
+  position: relative;
+  font-size: 50px;
+  font-weight: bolder;
+  margin: 0px;
+  top: -100px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .top-bar {
   position: relative;
   padding: 7.5px;

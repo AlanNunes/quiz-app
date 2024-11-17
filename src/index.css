@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #4238dc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -31,7 +31,20 @@ body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 
 }
 
+.quiz-container {
+  width: 900px;
+}
+
 .answer-feedback {
+  position: relative;
+  font-size: 50px;
+  font-weight: bolder;
+  margin: 0px;
+  top: -100px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.finished-feedback {
   position: relative;
   font-size: 50px;
   font-weight: bolder;
@@ -115,4 +128,17 @@ body {
 
 .confirm:hover {
   background-color: rgb(64, 243, 183);
+}
+
+.restart {
+  margin-top: 20px;
+  width: 175px;
+  height: 45px;
+  background-color: aquamarine;
+  color: black;
+  border: 2.5x;
+  border-color: rgb(110, 250, 203);
+  border-radius: 7.5px;
+  font-weight: bold;
+  cursor: pointer;
 }

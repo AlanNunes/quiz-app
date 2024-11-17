@@ -1,25 +1,32 @@
 import { useEffect, useState } from "react";
+import { timerEventBus } from "../Bus/EventBus";
+import { usePlayerContext } from "../Context/QuizContext";
 
 const TimerBar = () => {
-  const [seconds, setSeconds] = useState(60);
+  const init_seconds = 60;
+  const [seconds, setSeconds] = useState(init_seconds);
+  const { player } = usePlayerContext();
 
   useEffect(() => {
     const timer = setInterval(() => {
+      if (player.finished) {
+        return;
+      }
       setSeconds((prevSeconds) => {
         if (prevSeconds <= 0) {
+          clearInterval(timer);
+          timerEventBus.dispatch("timer_isup", { isTimeUp: true });
           return 0;
         }
         return prevSeconds - 1;
       });
-
-      if (seconds <= 0) {
-        alert("Time is up!");
-        clearInterval(timer);
-      }
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => {
+      setSeconds(init_seconds);
+      clearInterval(timer);
+    };
+  }, [player]);
   return (
     <div className="progress">
       <div

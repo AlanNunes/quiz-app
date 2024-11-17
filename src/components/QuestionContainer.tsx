@@ -3,7 +3,7 @@ import { QuizService } from "../services/QuizService";
 import { Question } from "../models/Question";
 import { usePlayerContext } from "../Context/QuizContext";
 import { Player } from "../models/Player";
-import { eventBus } from "../Bus/EventBus";
+import { eventBus, timerEventBus, TimerEvent } from "../Bus/EventBus";
 
 const QuestionContainer = () => {
   const { player, setPlayer } = usePlayerContext();
@@ -13,9 +13,26 @@ const QuestionContainer = () => {
 
   useEffect(() => {
     let question = QuizService.GetNextQuestion(seen_questions);
+    if (question === undefined) {
+      player.Finish();
+      if (player.score >= 700) {
+        player.Win();
+      } else {
+        player.Loose();
+      }
+    }
     setSelected_answer(undefined);
     setQuestion(question);
-    setSeen_questions((questions) => [...questions, question.id]);
+    setSeen_questions((questions) => [...questions, question?.id]);
+
+    const onTimeIsUp = (_: CustomEvent<TimerEvent>) => {
+      ConfirmAnswer();
+    };
+    timerEventBus.on("timer_isup", onTimeIsUp);
+
+    return () => {
+      timerEventBus.remove("timer_isup", onTimeIsUp);
+    };
   }, [player]);
 
   const SetSelectedAnswer = (answer_id: number) => {
@@ -23,8 +40,12 @@ const QuestionContainer = () => {
   };
 
   const ConfirmAnswer = () => {
-    let score = QuizService.ConfirmAnswer(question!, selected_answer!);
-    eventBus.dispatch("answer_feedback", { isCorrect: score > 0 });
+    const score = QuizService.ConfirmAnswer(question!, selected_answer);
+    const isCorrect = score > 0;
+    eventBus.dispatch("answer_feedback", {
+      isCorrect: isCorrect,
+      message: isCorrect ? "Na mosca!!!" : "Errou :(",
+    });
     setPlayer((player) => {
       let new_player = new Player(player.name);
       new_player.AddToScore(player.score + score);
@@ -53,7 +74,11 @@ const QuestionContainer = () => {
         })}
       </div>
       <div>
-        <button onClick={ConfirmAnswer} className="confirm" disabled={selected_answer === undefined}>
+        <button
+          onClick={ConfirmAnswer}
+          className="confirm"
+          disabled={selected_answer === undefined}
+        >
           Confirmar
         </button>
       </div>

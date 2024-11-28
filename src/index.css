@@ -142,3 +142,34 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+
+.player-name {
+  width: 400px;
+  height: 50px;
+  font-size: xx-large;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.playerNameLabel {
+  font-size: x-large;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.start-game {
+  margin-top: 20px;
+  width: 175px;
+  height: 45px;
+  background-color: aquamarine;
+  color: black;
+  border: 2.5x;
+  border-color: rgb(110, 250, 203);
+  border-radius: 7.5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.start-game:hover {
+  background-color: rgb(64, 243, 183);
+}

@@ -8,6 +8,7 @@ const HomePage = () => {
 
   return (
     <>
+      <h1>Tech Quiz</h1>
       <div>
         <label htmlFor="playerName" className="playerNameLabel">
           Preencha seu nome:

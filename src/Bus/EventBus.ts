@@ -1,6 +1,5 @@
 export interface AnswerFeedbackEvent {
   isCorrect: boolean;
-  message: string;
 }
 
 export interface TimerEvent {

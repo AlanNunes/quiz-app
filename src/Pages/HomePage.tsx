@@ -1,12 +1,13 @@
 import { usePlayerContext } from "../Context/QuizContext";
 import { Player } from "../models/Player";
-import { Form } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const { setPlayer } = usePlayerContext();
+  const navigate = useNavigate();
 
   return (
-    <Form action="game">
+    <>
       <div>
         <label htmlFor="playerName" className="playerNameLabel">
           Preencha seu nome:
@@ -17,17 +18,18 @@ const HomePage = () => {
           type="text"
           name="playerName"
           className="player-name"
+          autoComplete="off"
           onChange={(e) => {
             setPlayer(new Player(e.currentTarget.value));
           }}
         ></input>
       </div>
       <div>
-        <button className="start-game">
+        <button className="start-game" onClick={() => navigate("game")}>
           Começar
         </button>
       </div>
-    </Form>
+    </>
   );
 };
 

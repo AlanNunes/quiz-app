@@ -141,6 +141,7 @@ body {
   border-radius: 7.5px;
   font-weight: bold;
   cursor: pointer;
+  margin: 10px;
 }
 
 .player-name {

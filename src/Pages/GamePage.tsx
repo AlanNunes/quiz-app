@@ -5,9 +5,11 @@ import ScoreBar from "../components/ScoreBar";
 import TimerBar from "../components/TimerBar";
 import QuestionContainer from "../components/QuestionContainer";
 import { eventBus, AnswerFeedbackEvent } from "../Bus/EventBus";
+import { useNavigate } from "react-router-dom";
 
 const GamePage = () => {
   const { player, setPlayer } = usePlayerContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const greenBgColor = "#36c41d";
@@ -42,7 +44,7 @@ const GamePage = () => {
               ? `Parabéns ${player.name}! Você fez ${player.score} pontos :)`
               : `Poooxa ${player.name}, você fez apenas ${player.score} pontos :(`)}
           {player.finished && (
-            <p>
+            <div>
               <button
                 onClick={() =>
                   setPlayer((p) => {
@@ -53,7 +55,15 @@ const GamePage = () => {
               >
                 Recomeçar
               </button>
-            </p>
+              <button
+                onClick={() =>
+                  navigate("/")
+                }
+                className="restart"
+              >
+                Início
+              </button>
+            </div>
           )}
         </div>
         <div className="top-bar">

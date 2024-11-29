@@ -5,8 +5,11 @@ export class Player {
   finished: boolean = false;
   win: boolean | undefined = undefined;
 
-  constructor(name: string) {
+  constructor(name: string, score: number = 0, finished: boolean = false, win: boolean | undefined = undefined) {
     this.name = name;
+    this.score = score;
+    this.finished = finished;
+    this.win = win;
   }
 
   Reset(){

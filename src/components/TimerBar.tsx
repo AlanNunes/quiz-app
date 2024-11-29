@@ -20,7 +20,7 @@ const TimerBar = () => {
         }
         return prevSeconds - 1;
       });
-    }, 100);
+    }, 1000);
 
     return () => {
       setSeconds(init_seconds);

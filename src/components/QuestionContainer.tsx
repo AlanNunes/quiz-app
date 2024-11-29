@@ -20,6 +20,9 @@ const QuestionContainer = () => {
       } else {
         player.Loose();
       }
+      setPlayer(
+        new Player(player.name, player.score, player.finished, player.win)
+      );
     }
     setSelected_answer(undefined);
     setQuestion(question);
@@ -44,7 +47,6 @@ const QuestionContainer = () => {
     const isCorrect = score > 0;
     eventBus.dispatch("answer_feedback", {
       isCorrect: isCorrect,
-      message: isCorrect ? "Na mosca!!!" : "Errou :(",
     });
     setPlayer((player) => {
       let new_player = new Player(player.name);
